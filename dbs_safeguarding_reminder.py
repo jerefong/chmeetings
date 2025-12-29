@@ -28,19 +28,19 @@ continuous monitoring and timely notifications.
 '''
 
 ##### IMPORTS ######
-import requests								# Used for API calls to CHMeetings
-from datetime import date, timedelta
-import logging
-import os								    	# Used to call env var from the OS
-import base64                 # Used to encode mail with excel
-from openpyxl import Workbook
-from openpyxl.utils import get_column_letter
-import io                     # Used to generate excel byte
-import sys
-from typing import List, Dict
-from email.message import EmailMessage
-from google.oauth2.credentials import Credentials
-from googleapiclient.discovery import build
+import requests                              # HTTP client for interacting with the CHMeetings REST API
+from datetime import date, timedelta         # Date utilities for certificate expiry calculations
+import logging                               # Structured logging for operational visibility and debugging
+import os                                    # Access environment variables for configuration and secrets
+import base64                                # Encode email content for Gmail API
+from openpyxl import Workbook                # Create Excel workbooks in memory
+from openpyxl.utils import get_column_letter # Utility for Excel column formatting
+import io                                    # In-memory byte streams for Excel file generation
+import sys                                   # System-level functions (e.g. controlled script exit)
+from typing import List, Dict                # Type hints for improved readability and static analysis
+from email.message import EmailMessage       # Construct MIME-compliant email messages
+from google.oauth2.credentials import Credentials  # OAuth 2.0 credential handling for Google APIs
+from googleapiclient.discovery import build  # Build Gmail API service client
 
 
 # Define Script Name
