@@ -1,17 +1,17 @@
 Background
 
-CHMeetings is widely used by churches around the world. It is a membership
+ChMeetings is widely used by churches around the world. It is a membership
 management system that supports attendance tracking, event enrolment, and
 financial management.
 
-CHMeetings provides a fully featured API, which enables member information
+ChMeetings provides a fully featured API, which enables member information
 to be retrieved and updated programmatically.
 
 In the UK, churches are legally required to comply with safeguarding
 policies. CHMeetings allows churches to configure custom fields to store
 the expiry dates of DBS checks and safeguarding certificates.
 
-This script integrates with the CHMeetings API to programmatically retrieve
+This script integrates with the ChMeetings API to programmatically retrieve
 member records and identify individuals whose DBS and/or safeguarding
 certifications have expired or are due to expire within one month.
 
@@ -22,7 +22,7 @@ review by the People Team Coordinator and the Safeguarding Coordinator.
 
 Prerequisites
 
-CHMeetings must be configured with two custom fields to store the expiry
+ChMeetings must be configured with two custom fields to store the expiry
 dates of DBS checks and safeguarding certificates.
 
 API access to CHMeetings is required for the script to function.
