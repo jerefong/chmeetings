@@ -1,0 +1,38 @@
+name: DBS & Safeguarding Reminder
+
+on:
+  workflow_dispatch:        # allow manual run
+  schedule:
+    - cron: "0 2 1 * *"     # run monthly (1st day, 02:00 UTC)
+
+jobs:
+  run-reminder:
+    runs-on: ubuntu-latest
+    environment: DBS_Safeguarding_Reminder
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run DBS & Safeguarding script
+        env:
+          CHMEETINGS_API_TOKEN: ${{ secrets.CHMEETINGS_API_TOKEN }}
+          GOOGLE_CLIENT_ID: ${{ secrets.GOOGLE_CLIENT_ID }}
+          GOOGLE_CLIENT_SECRET: ${{ secrets.GOOGLE_CLIENT_SECRET }}
+          GOOGLE_REFRESH_TOKEN: ${{ secrets.GOOGLE_REFRESH_TOKEN }}
+          GMAIL_TO: ${{ vars.GMAIL_TO }}
+          GMAIL_SENDER: ${{ vars.GMAIL_SENDER }}
+          DBS_FIELD_ID: ${{ vars.DBS_FIELD_ID }}
+          SG_FIELD_ID: ${{ vars.SG_FIELD_ID }}
+        run: |
+          python DBS_Safeguarding_Reminder.py
