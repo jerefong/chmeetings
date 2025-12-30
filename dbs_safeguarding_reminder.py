@@ -118,12 +118,14 @@ def retrieve_members_info() -> tuple[list, list]:
   members_dbs = list()
   members_sg = list()
 	
-  # Set up variables for API Call - paginated response
-  endpoint = "https://api.chmeetings.com/api/v1/people"
-  headers = {
-      "apikey": CHMEETINGS_API_TOKEN,
-      "accept": "application/json",
-  }
+  # Set up variables for API Call - paginated response  
+  session = requests.Session()
+  session.headers.update({
+    "apikey": CHMEETINGS_API_TOKEN,
+    "accept": "application/json",
+  })
+  
+  endpoint = "https://api.chmeetings.com/api/v1/people"  
   
   page = 1
   page_size = 25
@@ -137,9 +139,8 @@ def retrieve_members_info() -> tuple[list, list]:
     }
 
     try:
-      resp = requests.get(
+      resp = session.get(
         endpoint,
-        headers=headers,
         params=params,
         timeout=10)
     except requests.RequestException as e:
