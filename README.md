@@ -49,3 +49,5 @@ securely. When using GitHub Actions, secrets should be configured according
 to the following guide:
 
 https://docs.github.com/en/actions/how-tos/write-workflows/choose-what-workflows-do/use-secrets
+
+A sample GitHub Action yml file is available in this repository for reference.
