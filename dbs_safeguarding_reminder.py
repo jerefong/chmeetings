@@ -59,10 +59,8 @@ CHMEETINGS_API_TOKEN = os.getenv("CHMEETINGS_API_TOKEN")
 # The values can be found in the raw API response of
 # https://api.chmeetings.com/api/v1/people
 
-# CHMeetings Field ID 887982 - Enhanced DBS Expiry Date
 DBS_FIELD_ID = os.getenv("DBS_FIELD_ID")
 
-# CHMeetings Field ID 887984 - Safeguarding Training Foundation Expiry Date
 SG_FIELD_ID = os.getenv("SG_FIELD_ID")
 
 # Google Client ID
@@ -118,8 +116,8 @@ def retrieve_members_info() -> tuple[list, list]:
     )
     
     # Initialise the members lists
-    members_dbs = list()
-    members_sg = list()
+    members_dbs = []
+    members_sg = []
     
     # Set up variables for API Call - paginated response  
     session = requests.Session()
@@ -132,7 +130,7 @@ def retrieve_members_info() -> tuple[list, list]:
     
     page = 1
     page_size = 25
-    members = list()
+    members = []
     
     # Loop through pages and extend the members list
     while True:
@@ -161,7 +159,7 @@ def retrieve_members_info() -> tuple[list, list]:
                 resp.text[:500])
             sys.exit(1)
             
-            # Now we are sure that API query is successful
+        # Now we are sure that API query is successful
         logging.info(
             "[retrieve_members_info] Successfully retrieve data on page %s from Chmeeting API",
             page
@@ -190,7 +188,7 @@ def retrieve_members_info() -> tuple[list, list]:
         page += 1
         
         
-        # Generate two lists of members with DBS and SG information respectively
+    # Generate two lists of members with DBS and SG information respectively
     for member in members:
         
         # Place all key-value pairs of additional_field into a list
@@ -226,7 +224,7 @@ def retrieve_members_info() -> tuple[list, list]:
             
             members_dbs.append(member_dbs)
             
-            # Append the list members_sg if Safeguarding information is found
+        # Append the list members_sg if Safeguarding information is found
         if matched_sg is True:
             member_sg = {
                 "id": member.get("id"),
@@ -265,7 +263,7 @@ def expiring_within_one_month(members: List[Dict], cert_type:str, days=30) -> li
             return None
         
         # Initialise the expiring list
-    expiring = list()
+    expiring = []
     
     # Loop through the members and append those with expired or expiring DBS/Safeguarding certs
     for member in members:
